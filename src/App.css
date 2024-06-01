@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgb(249, 246, 238);
+  border-bottom: 1px solid black;
+}
+
+header img {
+  width: 10%;
+  height: 10%;
+  object-fit: cover;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+table {
+  width: 60%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+thead {
+  background-color: rgb(232, 228, 217);
+  color: #000000;
+  font-weight: bold;
+  border: 1px solid black;
+}
+
+thead th {
+  padding: 12px 15px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.container-arrows {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.container-arrows #up-arrow {
+  margin-bottom: -6px;
+}
+
+.container-arrows #down-arrow {
+  margin-top: -6px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+  border: 1px solid black;
+}
+
+tbody td {
+  padding: 12px 15px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer p {
+  padding-bottom: 30px;
+}
