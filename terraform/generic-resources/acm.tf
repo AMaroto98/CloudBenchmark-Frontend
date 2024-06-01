@@ -11,7 +11,7 @@ resource "aws_acm_certificate" "cloudbenchmarkzone_cert_ireland" {
   }
 }
 
-# Crear registros de validación DNS en Route 53 para Irlanda
+/* # Crear registros de validación DNS en Route 53 para Irlanda
 resource "aws_route53_record" "cert_validation_ireland" {
   provider = aws.ireland
   for_each = {
@@ -27,7 +27,7 @@ resource "aws_route53_record" "cert_validation_ireland" {
   type    = each.value.type
   ttl     = 300
   records = [each.value.record]
-}
+} */
 
 # Crear certificado ACM en Virginia
 resource "aws_acm_certificate" "cloudbenchmarkzone_cert_virginia" {
@@ -42,7 +42,7 @@ resource "aws_acm_certificate" "cloudbenchmarkzone_cert_virginia" {
   }
 }
 
-# Crear registros de validación DNS en Route 53 para Virginia
+/* # Crear registros de validación DNS en Route 53 para Virginia
 resource "aws_route53_record" "cert_validation_virginia" {
   provider = aws.virginia
   for_each = {
@@ -58,6 +58,6 @@ resource "aws_route53_record" "cert_validation_virginia" {
   type    = each.value.type
   ttl     = 300
   records = [each.value.record]
-}
+} */
 
 

@@ -18,12 +18,13 @@ output "certificate_arn_virginia" {
   value       = aws_acm_certificate.cloudbenchmarkzone_cert_virginia.arn
 }
 
-output "validation_records_ireland" {
+/* output "validation_records_ireland" {
   description = "DNS records for validating the ACM certificate in Ireland"
   value       = [for record in aws_route53_record.cert_validation_ireland : record.name]
-}
+} */
 
-output "validation_records_virginia" {
+/* output "validation_records_virginia" {
   description = "DNS records for validating the ACM certificate in Virginia"
   value       = [for record in aws_route53_record.cert_validation_virginia : record.name]
 }
+ */
