@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependency directories
 node_modules
 dist
 dist-ssr
@@ -22,3 +23,46 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Terraform files
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+.terraform/
+terraform.tfstate.backup
+.terraform.lock.hcl
+
+# .tfvars files, which are likely to contain sensitive data, such as passwords, SSH keys, etc.
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are usually local-only
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include tfplan files to avoid committing your actual plan outputs
+*.tfplan
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore crash log files
+crash.log
+
+# Ignore directory for Sentinel policy files
+.sentinel
+
+# Ignore temporary files created by editors
+*~
+.*.swp
+*.swp
+.*.swo
+*.swo
