@@ -12,8 +12,7 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
   padding: 10px 20px;
   background-color: rgb(249, 246, 238);
   border-bottom: 1px solid black;
@@ -25,63 +24,92 @@ header img {
   object-fit: cover;
 }
 
-.table-container {
+/* Contenedor general */
+.tables-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 16px; /* Espacio entre las tablas */
+}
+
+/* Tablas */
+.main-table-container, .auxiliar-table-container {
+  padding: 30px;
+}
+
+.auxiliar-table-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
 }
 
-table {
-  width: 60%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 18px;
-  text-align: center;
-  border: 1px solid black;
-}
-
-thead {
-  background-color: rgb(232, 228, 217);
-  color: #000000;
-  font-weight: bold;
-  border: 1px solid black;
-}
-
-thead th {
-  padding: 12px 15px;
-}
-
-.table-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-}
-
-.container-arrows {
+.auxiliar-table-inputs {
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  flex-grow: 1; /* Hace que el contenedor crezca para ocupar el espacio restante */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.container-arrows #up-arrow {
-  margin-bottom: -6px;
+/* Estilos comunes de la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.container-arrows #down-arrow {
-  margin-top: -6px;
+table thead th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f2f2f2;
+  text-align: left;
 }
 
 tbody tr {
   border-bottom: 1px solid #dddddd;
-  border: 1px solid black;
 }
 
-tbody td {
-  padding: 12px 15px;
+
+/* Tabla auxiliar */
+
+.auxiliar-table-inputs label {
+  display: block;
+  margin-bottom: 8px;
 }
 
+.auxiliar-table-inputs input[type="text"],
+.auxiliar-table-inputs input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.auxiliar-table-inputs button {
+  padding: 8px 16px;
+  margin-bottom: 15px;
+  background-color: #f2f2f2;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auxiliar-table-inputs button:hover {
+  background-color: #e0e0e0;
+}
+
+
+/* Footer */
 footer {
   display: flex;
   justify-content: center;
@@ -89,5 +117,5 @@ footer {
 }
 
 footer p {
-  padding-bottom: 30px;
+  padding-top: 50px;
 }

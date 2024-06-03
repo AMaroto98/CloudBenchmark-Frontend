@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { TableHeader } from "./TableHeader";
 import { getData } from "../services/http/api";
 import { IData } from "../types/IData";
-import TablePrueba from "./prueba";
 
-export function TableContainer() {
+export function MainTable() {
   const [data, setData] = useState<IData[]>([]);
 
   useEffect(() => {
@@ -14,15 +13,12 @@ export function TableContainer() {
     };
     fetchData();
     console.log(data);
-
   }, []);
 
   return (
-    <div className="table-container">
+    <div className="main-table-container">
       <table>
         <TableHeader />
-        {/* <TablePrueba label="Cloud Provider" /> */}
-
         <tbody>
           {data.map((instance, index) => (
             <tr key={index}>
@@ -33,7 +29,7 @@ export function TableContainer() {
               <td>{instance.MEMSize}</td>
               <td>{instance.MemoryMark}</td>
               <td>{instance.USDHour}</td>
-              <td>{instance.URLtest} </td>
+              <td><a href={instance.URLtest} target="_blank">Link</a></td>
             </tr>
           ))}
         </tbody>

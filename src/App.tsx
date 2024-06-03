@@ -1,15 +1,18 @@
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { TableContainer } from "./components/TableContainer";
+import { MainTable } from "./components/MainTable";
 import "./App.css";
+import { AuxiliarTable } from "./components/AuxiliarTable";
 
 function App() {
   return (
     <>
       <Header />
-      <TableContainer />
+      <div className="tables-container">
+        <MainTable />
+        <AuxiliarTable />
+      </div>
       <Footer />
-
     </>
   );
 }
