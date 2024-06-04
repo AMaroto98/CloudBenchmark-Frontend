@@ -32,7 +32,11 @@ header img {
 }
 
 /* Tablas */
-.main-table-container, .auxiliar-table-container {
+.main-table-container,
+.auxiliar-table-container h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 30px;
 }
 
@@ -60,7 +64,8 @@ table {
   border-radius: 8px;
 }
 
-table thead th, table td {
+table thead th,
+table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
@@ -75,7 +80,6 @@ tbody tr {
   border-bottom: 1px solid #dddddd;
 }
 
-
 /* Tabla auxiliar */
 
 .auxiliar-table-inputs label {
@@ -83,8 +87,9 @@ tbody tr {
   margin-bottom: 8px;
 }
 
-.auxiliar-table-inputs input[type="text"],
-.auxiliar-table-inputs input[type="number"] {
+.auxiliar-table-inputs input[type="number"],
+.auxiliar-table-inputs input[type="search"],
+select {
   width: 100%;
   padding: 8px;
   margin-bottom: 16px;
@@ -107,7 +112,6 @@ tbody tr {
 .auxiliar-table-inputs button:hover {
   background-color: #e0e0e0;
 }
-
 
 /* Footer */
 footer {
