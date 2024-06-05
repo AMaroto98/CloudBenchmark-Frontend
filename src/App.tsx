@@ -1,9 +1,9 @@
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
-import { MainTable } from "./components/MainTable";
-import "./App.css";
 import { AuxiliarTable } from "./components/AuxiliarTable";
 import { ApiProvider } from "./provider/ApiProvider";
+import { MainTable } from "./components/MainTable";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
+import "./App.css";
 
 function App() {
   return (

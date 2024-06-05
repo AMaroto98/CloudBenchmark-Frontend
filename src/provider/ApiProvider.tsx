@@ -6,8 +6,7 @@ import { getData } from "../services/http/api";
 
 export const ApiContext = createContext<IApiContext>({
   filteredData: [],
-  filterForInstanceName: async () => {},
-  filterForCloudProvider: async () => {},
+  applyFilters: async () => {},
 });
 
 export function ApiProvider({ children }: IProvider) {
@@ -23,54 +22,32 @@ export function ApiProvider({ children }: IProvider) {
     fetchData();
   }, []);
 
-  const filterForCloudProvider = async (cloudProviders: string[]) => {
+  const applyFilters = async (
+    cloudProviders: string[],
+    instanceName: string
+  ) => {
+    let filteredData = originalData;
+
     if (cloudProviders.length !== 0) {
-      const filteredData = originalData.filter((x) =>
+      filteredData = filteredData.filter((x) =>
         cloudProviders.includes(x.CloudProvider)
       );
-      setFilteredData(filteredData);
-    } else {
-      setFilteredData(originalData);
     }
-  };
 
-  const filterForInstanceName = async (filter: string) => {
-    if (filter.length !== 0) {
-      const filteredData = originalData.filter((x) =>
-        x.InstanceName.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    if (instanceName.length !== 0) {
+      filteredData = filteredData.filter((x) =>
+        x.InstanceName.toLowerCase().includes(instanceName.toLowerCase())
       );
-      setFilteredData(filteredData);
     }
 
-    // else {
-    //   setFilteredData(originalData);
-    // }
+    setFilteredData(filteredData);
   };
-
-  //   const applyFilters = async (cloudProviders: string[], instanceName: string) => {
-  //     let filteredData = originalData;
-
-  //     if (cloudProviders.length !== 0) {
-  //       filteredData = filteredData.filter((x) =>
-  //         cloudProviders.includes(x.CloudProvider)
-  //       );
-  //     }
-
-  //     if (instanceName.length !== 0) {
-  //       filteredData = filteredData.filter((x) =>
-  //         x.InstanceName.toLocaleLowerCase().includes(instanceName.toLocaleLowerCase())
-  //       );
-  //     }
-
-  //     setFilteredData(filteredData);
-  //   };
 
   return (
     <ApiContext.Provider
       value={{
         filteredData,
-        filterForCloudProvider,
-        filterForInstanceName,
+        applyFilters,
       }}
     >
       {children}

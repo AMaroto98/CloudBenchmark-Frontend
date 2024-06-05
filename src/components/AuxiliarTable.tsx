@@ -4,24 +4,19 @@ import { ApiContext } from "../provider/ApiProvider";
 import { IOptionSelect } from "../types/IOptionSelect";
 
 export function AuxiliarTable() {
-  const { filterForInstanceName, filterForCloudProvider } =
-    useContext(ApiContext);
+  const { applyFilters } = useContext(ApiContext);
 
   const instanceNameRef = useRef<string>("");
   const [cloudProviders, setCloudProviders] = useState<
     MultiValue<IOptionSelect>
   >([]);
 
-  // Filter by Cloud Provider
   function handleCloudProviderChange(
     selectedOptions: MultiValue<IOptionSelect>
   ) {
-    console.log(selectedOptions);
-
     setCloudProviders(selectedOptions);
   }
 
-  // Filter by Instance Name
   function handleInstanceNameChange(
     event: ChangeEvent<HTMLInputElement>
   ): void {
@@ -29,11 +24,8 @@ export function AuxiliarTable() {
   }
 
   async function handleSearch() {
-    // Mapeado de las array para tener el nombre de los cloud providers
     const selectedProviders = cloudProviders.map((provider) => provider.value);
-
-    await filterForCloudProvider(selectedProviders);
-    await filterForInstanceName(instanceNameRef.current);
+    await applyFilters(selectedProviders, instanceNameRef.current);
   }
 
   const cloudProviderOptions: IOptionSelect[] = [

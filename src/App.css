@@ -32,19 +32,17 @@ header img {
 }
 
 /* Tablas */
-.main-table-container,
-.auxiliar-table-container h2 {
+.main-table-container h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
 }
 
+
+.main-table-container,
 .auxiliar-table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
+  padding: 40px;
+  padding-left: 30px;
 }
 
 .auxiliar-table-inputs {
@@ -79,6 +77,14 @@ table th {
 tbody tr {
   border-bottom: 1px solid #dddddd;
 }
+
+/* Botones paginación tabla */
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  margin-top: 20px;
+}
+
 
 /* Tabla auxiliar */
 
@@ -115,6 +121,7 @@ select {
 
 /* Footer */
 footer {
+  border: 2px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,3 +130,4 @@ footer {
 footer p {
   padding-top: 50px;
 }
+
