@@ -622,5 +622,31 @@
       "MEMSize": 32,
       "URLtest": "https://",
       "USDHour": 0.270
+    },
+    {
+      "InstanceName": "c2-standard-9",
+      "CloudProvider": "GCP",
+      "CPUCompression": 36000,
+      "CPUCores": 4,
+      "CPUEncryption": 1200,
+      "CPUExtendedInstructions": 4500,
+      "CPUFloatingPointMath": 24000,
+      "CPUIntegerMath": 31000,
+      "CPUMark": 5200,
+      "CPUPhysics": 1200,
+      "CPUPrimeNumbers": 60.5,
+      "CPUSingleThreaded": 1050,
+      "CPUSorting": 20000,
+      "MEMAvailableRAM": 30000,
+      "MEMDatabaseOperations": 5200,
+      "MEMMemoryLatency": 70,
+      "MEMMemoryReadCached": 9000,
+      "MEMMemoryReadUncached": 8700,
+      "MEMMemoryThreaded": 70000,
+      "MEMMemoryWrite": 12000,
+      "MemoryMark": 1700,
+      "MEMSize": 32,
+      "URLtest": "https://",
+      "USDHour": 0.270
     }
   ]

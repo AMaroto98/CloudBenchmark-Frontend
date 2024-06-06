@@ -1,38 +1,77 @@
-import { ChangeEvent, useContext, useRef, useState } from "react";
-import Select, { MultiValue } from "react-select";
+import { ChangeEvent, useContext, useState } from "react";
+import Select, { MultiValue, SingleValue } from "react-select";
 import { ApiContext } from "../provider/ApiProvider";
-import { IOptionSelect } from "../types/IOptionSelect";
+import { IOptionStringSelect } from "../types/IOptionStringSelect";
+import { IOptionNumberSelect } from "../types/IOptionNumberSelect";
+import { cloudProviderOptions } from "../data/Options";
+import {
+  generateBase2Options,
+  generateCustomStepOptions,
+} from "../services/logic/GenereateOptions";
 
 export function AuxiliarTable() {
-  const { applyFilters } = useContext(ApiContext);
+  const { applyFilters, resetFilters } = useContext(ApiContext);
 
-  const instanceNameRef = useRef<string>("");
-  const [cloudProviders, setCloudProviders] = useState<
-    MultiValue<IOptionSelect>
-  >([]);
+  const [instanceName, setInstanceName] = useState<string>("");
+  const [filters, setFilters] = useState({
+    cloudProviders: [] as MultiValue<IOptionStringSelect>,
+    cpuCores: null as SingleValue<IOptionNumberSelect> | null,
+    cpuMark: null as SingleValue<IOptionNumberSelect> | null,
+    memSize: null as SingleValue<IOptionNumberSelect> | null,
+    memoryMark: null as SingleValue<IOptionNumberSelect> | null,
+  });
 
   function handleCloudProviderChange(
-    selectedOptions: MultiValue<IOptionSelect>
+    selectedOptions: MultiValue<IOptionStringSelect>
   ) {
-    setCloudProviders(selectedOptions);
+    setFilters((prev) => ({ ...prev, cloudProviders: selectedOptions }));
   }
 
   function handleInstanceNameChange(
     event: ChangeEvent<HTMLInputElement>
   ): void {
-    instanceNameRef.current = event.target.value;
+    setInstanceName(event.target.value);
   }
 
-  async function handleSearch() {
-    const selectedProviders = cloudProviders.map((provider) => provider.value);
-    await applyFilters(selectedProviders, instanceNameRef.current);
+  function handleSelectChange(
+    selectedOption: SingleValue<IOptionNumberSelect>,
+    field: keyof typeof filters
+  ) {
+    setFilters((prev) => ({ ...prev, [field]: selectedOption }));
   }
 
-  const cloudProviderOptions: IOptionSelect[] = [
-    { value: "AWS", label: "AWS" },
-    { value: "Azure", label: "Azure" },
-    { value: "GCP", label: "GCP" },
-  ];
+  function handleSearch() {
+    const selectedProviders = filters.cloudProviders.map(
+      (provider) => provider.value
+    );
+    const selectedCpuCores = filters.cpuCores ? filters.cpuCores.value : null;
+    const selectedCpuMark = filters.cpuMark ? filters.cpuMark.value : null;
+    const selectedMemSize = filters.memSize ? filters.memSize.value : null;
+    const selectedMemoryMark = filters.memoryMark
+      ? filters.memoryMark.value
+      : null;
+
+    applyFilters(
+      selectedProviders,
+      instanceName,
+      selectedCpuCores,
+      selectedCpuMark,
+      selectedMemSize,
+      selectedMemoryMark
+    );
+  }
+
+  function clearFilters() {
+    setFilters({
+      cloudProviders: [],
+      cpuCores: null,
+      cpuMark: null,
+      memSize: null,
+      memoryMark: null,
+    });
+    setInstanceName("");
+    resetFilters();
+  }
 
   return (
     <div className="auxiliar-table-container">
@@ -44,18 +83,66 @@ export function AuxiliarTable() {
           options={cloudProviderOptions}
           className="basic-multi-select"
           classNamePrefix="select"
+          value={filters.cloudProviders}
           onChange={handleCloudProviderChange}
         />
         <br />
+
         <label htmlFor="InstanceName">Instance Name: </label>
-        <input type="search" onChange={handleInstanceNameChange} /> <br />
+        <input
+          type="search"
+          value={instanceName}
+          onChange={handleInstanceNameChange}
+        />
+
         <label htmlFor="CPUCores">CPU Cores: </label>
-        <input type="number" /> <br />
+        <Select
+          name="CPUCores"
+          options={generateBase2Options(8)}
+          className="basic-select"
+          classNamePrefix="select"
+          value={filters.cpuCores}
+          onChange={(option) => handleSelectChange(option, "cpuCores")}
+        />
+        <br />
+
         <label htmlFor="CPUMark">CPU Mark: </label>
-        <input type="number" /> <br />
+        <Select
+          name="cpuMark"
+          options={generateCustomStepOptions(25000, 1000)}
+          className="basic-select"
+          classNamePrefix="select"
+          value={filters.cpuMark}
+          onChange={(option) => handleSelectChange(option, "cpuMark")}
+        />
+        <br />
+
         <label htmlFor="MEMSize">MEM Size: </label>
-        <input type="number" /> <br />
+        <Select
+          name="memorySize"
+          options={generateBase2Options(10)}
+          className="basic-select"
+          classNamePrefix="select"
+          value={filters.memSize}
+          onChange={(option) => handleSelectChange(option, "memSize")}
+        />
+        <br />
+
+        <label htmlFor="MemoryMark">Memory Mark: </label>
+        <Select
+          name="memoryMark"
+          options={generateCustomStepOptions(5000, 250)}
+          className="basic-select"
+          classNamePrefix="select"
+          value={filters.memoryMark}
+          onChange={(option) => handleSelectChange(option, "memoryMark")}
+        />
+        <br />
+
         <button onClick={handleSearch}>Filter</button>
+        <button onClick={clearFilters} id="clear-filters">
+          Clear Filters
+        </button>
       </div>
     </div>
   );

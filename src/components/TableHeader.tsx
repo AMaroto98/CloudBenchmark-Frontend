@@ -1,5 +1,3 @@
-
-
 export function TableHeader() {
   return (
     <thead>

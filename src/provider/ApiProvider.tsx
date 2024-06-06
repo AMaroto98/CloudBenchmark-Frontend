@@ -7,6 +7,7 @@ import { getData } from "../services/http/api";
 export const ApiContext = createContext<IApiContext>({
   filteredData: [],
   applyFilters: async () => {},
+  resetFilters: () => {},
 });
 
 export function ApiProvider({ children }: IProvider) {
@@ -24,7 +25,11 @@ export function ApiProvider({ children }: IProvider) {
 
   const applyFilters = async (
     cloudProviders: string[],
-    instanceName: string
+    instanceName: string,
+    cpuCores: number | null,
+    cpuMark: number | null,
+    memSize: number | null,
+    memoryMark: number | null
   ) => {
     let filteredData = originalData;
 
@@ -40,7 +45,28 @@ export function ApiProvider({ children }: IProvider) {
       );
     }
 
+    if (cpuCores !== null) {
+      
+      filteredData = filteredData.filter((x) => x.CPUCores <= cpuCores);
+    }
+    
+    if (cpuMark !== null) {
+      filteredData = filteredData.filter((x) => x.CPUMark <= cpuMark);
+    }
+
+    if (memSize !== null) {
+      filteredData = filteredData.filter((x) => x.MEMSize <= memSize);
+    }
+
+    if (memoryMark !== null) {
+      filteredData = filteredData.filter((x) => x.MemoryMark <= memoryMark);
+    }
+
     setFilteredData(filteredData);
+  };
+
+  const resetFilters = () => {
+    setFilteredData(originalData);
   };
 
   return (
@@ -48,6 +74,7 @@ export function ApiProvider({ children }: IProvider) {
       value={{
         filteredData,
         applyFilters,
+        resetFilters,
       }}
     >
       {children}

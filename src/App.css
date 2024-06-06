@@ -28,7 +28,6 @@ header img {
 .tables-container {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 16px; /* Espacio entre las tablas */
 }
 
 /* Tablas */
@@ -38,11 +37,11 @@ header img {
   align-items: center;
 }
 
-
 .main-table-container,
 .auxiliar-table-container {
   padding: 40px;
   padding-left: 30px;
+  border: 2px solid blue;
 }
 
 .auxiliar-table-inputs {
@@ -79,15 +78,19 @@ tbody tr {
 }
 
 /* Botones paginación tabla */
-.pagination button {
-  margin: 0 5px;
-  padding: 5px 10px;
+
+.pagination {
+  border: 2px solid red;
+  display: flex;
+  align-items: center;
   margin-top: 20px;
 }
-
+.pagination button {
+  margin: 10px;
+  padding: 5px 10px;
+}
 
 /* Tabla auxiliar */
-
 .auxiliar-table-inputs label {
   display: block;
   margin-bottom: 8px;
@@ -119,6 +122,21 @@ select {
   background-color: #e0e0e0;
 }
 
+.auxiliar-table-inputs #clear-filters {
+  padding: 8px 16px;
+  margin-bottom: 15px;
+  background-color: #cc2e2e;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auxiliar-table-inputs #clear-filters:hover {
+  background-color: #8b2323;
+}
+
 /* Footer */
 footer {
   border: 2px solid black;
@@ -130,4 +148,3 @@ footer {
 footer p {
   padding-top: 50px;
 }
-
