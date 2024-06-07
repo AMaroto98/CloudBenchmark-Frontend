@@ -1,17 +1,11 @@
-data "aws_s3_bucket" "bucket" {
-  bucket = local.bucket_name
-}
-
-resource "aws_s3_bucket_public_access_block" "bucket_public_access" {
-  bucket                  = data.aws_s3_bucket.bucket.id
-  block_public_policy     = true
-  block_public_acls       = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
-
 resource "aws_cloudfront_origin_access_identity" "cloudfront_identity" {
   comment = "Some comment"
+}
+
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  policy = data.aws_iam_policy_document.s3_policy.json
 }
 
 data "aws_iam_policy_document" "s3_policy" {
@@ -19,8 +13,8 @@ data "aws_iam_policy_document" "s3_policy" {
     actions = ["s3:GetObject"]
 
     resources = [
-      data.aws_s3_bucket.bucket.arn,
-      "${data.aws_s3_bucket.bucket.arn}/*"
+      aws_s3_bucket.website_bucket.arn,
+      "${aws_s3_bucket.website_bucket.arn}/*"
     ]
 
     principals {
@@ -28,11 +22,6 @@ data "aws_iam_policy_document" "s3_policy" {
       identifiers = [aws_cloudfront_origin_access_identity.cloudfront_identity.iam_arn]
     }
   }
-}
-
-resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = data.aws_s3_bucket.bucket.id
-  policy = data.aws_iam_policy_document.s3_policy.json
 }
 
 resource "aws_cloudfront_distribution" "cloudfront_distribution" {
@@ -71,7 +60,7 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
     max_ttl                = 0
     min_ttl                = 0
     smooth_streaming       = false
-    target_origin_id       = data.aws_s3_bucket.bucket.id
+    target_origin_id       = aws_s3_bucket.website_bucket.id
     trusted_key_groups     = []
     trusted_signers        = []
     viewer_protocol_policy = "redirect-to-https"
@@ -86,7 +75,7 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
     min_ttl                = 0
     path_pattern           = "index.html"
     smooth_streaming       = false
-    target_origin_id       = data.aws_s3_bucket.bucket.id
+    target_origin_id       = aws_s3_bucket.website_bucket.id
     trusted_key_groups     = []
     trusted_signers        = []
     viewer_protocol_policy = "redirect-to-https"
@@ -112,7 +101,7 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
     min_ttl                = 0
     path_pattern           = "json/*"
     smooth_streaming       = false
-    target_origin_id       = data.aws_s3_bucket.bucket.id
+    target_origin_id       = aws_s3_bucket.website_bucket.id
     trusted_key_groups     = []
     trusted_signers        = []
     viewer_protocol_policy = "redirect-to-https"
@@ -132,8 +121,8 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
   origin {
     connection_attempts = 3
     connection_timeout  = 10
-    domain_name         = data.aws_s3_bucket.bucket.bucket_regional_domain_name
-    origin_id           = data.aws_s3_bucket.bucket.id
+    domain_name         = aws_s3_bucket.website_bucket.bucket_regional_domain_name
+    origin_id           = aws_s3_bucket.website_bucket.id
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.cloudfront_identity.cloudfront_access_identity_path
