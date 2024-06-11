@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { TableHeader } from "./TableHeader";
 import { ApiContext } from "../provider/ApiProvider";
 
 export function MainTable() {
@@ -23,7 +22,18 @@ export function MainTable() {
       {filteredData.length !== 0 ? (
         <>
           <table>
-            <TableHeader />
+            <thead>
+              <tr>
+                <th>Cloud Provider</th>
+                <th>Instance Name</th>
+                <th>CPU Cores</th>
+                <th>CPU Mark</th>
+                <th>MEM Size</th>
+                <th>Memory Mark</th>
+                <th>USD Hour</th>
+                <th>URL test</th>
+              </tr>
+            </thead>
             <tbody>
               {currentData.map((instance, index) => (
                 <tr key={index}>
