@@ -41,7 +41,7 @@ header img {
 .auxiliar-table-container {
   padding: 40px;
   padding-left: 30px;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
 }
 
 .auxiliar-table-inputs {
@@ -68,6 +68,10 @@ table td {
   text-align: center;
 }
 
+table td a {
+  text-decoration: none;
+}
+
 table th {
   background-color: #f2f2f2;
   text-align: left;
@@ -78,10 +82,10 @@ tbody tr {
 }
 
 /* Botones paginación tabla */
-
 .pagination {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 20px;
 }

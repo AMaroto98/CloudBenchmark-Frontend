@@ -10,7 +10,6 @@ export function MainTable() {
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-  // Obtener los datos para la página actual
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);

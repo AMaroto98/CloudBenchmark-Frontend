@@ -47,19 +47,19 @@ export function ApiProvider({ children }: IProvider) {
 
     if (cpuCores !== null) {
       
-      filteredData = filteredData.filter((x) => x.CPUCores <= cpuCores);
+      filteredData = filteredData.filter((x) => x.CPUCores >= cpuCores);
     }
     
     if (cpuMark !== null) {
-      filteredData = filteredData.filter((x) => x.CPUMark <= cpuMark);
+      filteredData = filteredData.filter((x) => x.CPUMark >= cpuMark);
     }
 
     if (memSize !== null) {
-      filteredData = filteredData.filter((x) => x.MEMSize <= memSize);
+      filteredData = filteredData.filter((x) => x.MEMSize >= memSize);
     }
 
     if (memoryMark !== null) {
-      filteredData = filteredData.filter((x) => x.MemoryMark <= memoryMark);
+      filteredData = filteredData.filter((x) => x.MemoryMark >= memoryMark);
     }
 
     setFilteredData(filteredData);

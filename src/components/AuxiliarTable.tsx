@@ -3,8 +3,8 @@ import Select, { MultiValue, SingleValue } from "react-select";
 import { ApiContext } from "../provider/ApiProvider";
 import { IOptionStringSelect } from "../types/IOptionStringSelect";
 import { IOptionNumberSelect } from "../types/IOptionNumberSelect";
-import { cloudProviderOptions } from "../data/Options";
 import {
+  cloudProviderOptions,
   generateBase2Options,
   generateCustomStepOptions,
 } from "../services/logic/GenereateOptions";
